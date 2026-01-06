@@ -1,6 +1,7 @@
 ## Keybindings (yabai + skhd)
 
-<img width="3420" height="2224" alt="image" src="https://github.com/user-attachments/assets/1a312a6b-fc7a-4c4a-9e0a-ed700eb6001a" />
+
+<img width="3420" height="2224" alt="image" src="https://github.com/user-attachments/assets/b823e637-f5a7-4e40-a73e-03c09fda099c" />
 
 <img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/89629014-6eea-4f95-adf4-889241036846" />
 
