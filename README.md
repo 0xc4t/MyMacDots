@@ -3,7 +3,9 @@
 
 <img width="3420" height="2224" alt="image" src="https://github.com/user-attachments/assets/b823e637-f5a7-4e40-a73e-03c09fda099c" />
 
-<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/89629014-6eea-4f95-adf4-889241036846" />
+---
+<img width="3420" height="2224" alt="image" src="https://github.com/user-attachments/assets/817f772b-fbab-48a7-9184-f73208493bd8" />
+
 
 ### Window Focus (Arrow Keys)
 
