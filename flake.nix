@@ -19,14 +19,20 @@
           pkgs.mkalias
           pkgs.fastfetch
           pkgs.wget
+          pkgs.btop
+          pkgs.flameshot
+          pkgs.sketchybar
+          pkgs.tree
+          pkgs.lua 
         ];
 
       system.primaryUser = "0xc4t";
 
       homebrew = {
         enable = true;
-        taps = [ "koekeishiya/formulae" ];
-        brews = [ "yabai" "skhd" "mingw-w64" "clang-format"];
+        taps = [ "koekeishiya/formulae" "shaunsingh/SFMono-Nerd-Font-Ligaturized" "FelixKratz/formulae"];
+        brews = [ "skhd" "mingw-w64" "clang-format" "openjdk" "switchaudio-osx" "nowplaying-cli" ];
+        casks = ["postman" "font-sf-mono-nerd-font-ligaturized" "telegram-desktop" "sf-symbols" "font-sf-mono" "font-sf-pro"];
       };
 
 
@@ -46,8 +52,9 @@
       modules = [ 
       configuration
       ./modules/skhd.nix
-      ./modules/mac-rto.nix
+      ./darwin/mac-rto.nix
       ./modules/yabai.nix
+      ./modules/sketchybar.nix
        nix-homebrew.darwinModules.nix-homebrew
       {
       nix-homebrew = {
