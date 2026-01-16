@@ -1,0 +1,148 @@
+#!/bin/bash
+
+CONFIG_DIR="$HOME/.config/sketchybar"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### COLOR PALETTE (Catppuccin Mocha) #####
+BASE=0xff1e1e2e
+SURFACE=0xff313244
+TEXT=0xffcdd6f4
+SUBTEXT=0xffa6adc8
+
+BLUE=0xff89b4fa
+GREEN=0xffa6e3a1
+YELLOW=0xfff9e2af
+RED=0xfff38ba8
+MAUVE=0xffcba6f7
+
+##### BAR APPEARANCE #####
+sketchybar --bar \
+  position=top \
+  height=40 \
+  blur_radius=30 \
+  color=$BASE \
+  redaction=off
+
+
+##### DEFAULT ITEM STYLE #####
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="SF Pro Display:Bold:14.0"
+  label.font="JetbrainsMono Nerd Font:Bold:14.0"
+  icon.color=$TEXT
+  label.color=$TEXT
+  background.color=$SURFACE
+  background.corner_radius=5
+  background.height=25
+  icon.padding_left=5
+  icon.padding_right=5
+  label.padding_left=5
+  label.padding_right=5
+)
+
+sketchybar --default "${default[@]}"
+
+
+##### SPACES (YABAI) #####
+
+# SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+
+# for i in "${!SPACE_ICONS[@]}"; do
+#   sid="$(($i+1))"
+#   sketchybar --add space space.$sid left \
+#              --set space.$sid \
+#                space=$sid \
+#                icon="${SPACE_ICONS[i]}" \
+#                icon.color=$SUBTEXT \
+#                label.drawing=on \
+#                background.color=$SURFACE\
+#                background.drawing=off \
+#                padding_left=0 \
+#                padding_right=0 \
+#                script="$PLUGIN_DIR/space.sh" \
+#                click_script="yabai -m space --focus $sid" \
+#                bracket=spaces
+# done
+
+sketchybar --add event aerospace_workspace_change
+
+for sid in $(aerospace list-workspaces --all); do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=0x44ffffff \
+        background.corner_radius=5 \
+        background.height=20 \
+        background.drawing=off \
+        label="$sid" \
+        click_script="aerospace workspace $sid" \
+        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+
+### Window Active
+sketchybar --add item front_app left \
+           --set front_app \
+             icon.drawing=off \
+             label.color=$BLUE \
+             background.color=$SURFACE \
+             script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+##### RIGHT ITEMS #####
+
+# Battery
+sketchybar --add item battery right \
+           --set battery \
+             icon.color=$GREEN \
+             label.color=$TEXT \
+             background.color=$SURFACE \
+             update_freq=120 \
+             script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change
+
+# Clock
+sketchybar --add item clock right \
+           --set clock \
+             update_freq=10 \
+             icon= \
+             icon.color=$YELLOW \
+             label.color=$TEXT \
+             background.color=$SURFACE \
+             script="$PLUGIN_DIR/clock.sh"
+
+# WiFi
+sketchybar --add item wifi right \
+           --set wifi \
+             icon.color=$BLUE \
+             label.color=$TEXT \
+             background.color=$SURFACE \
+             update_freq=15 \
+             script="$PLUGIN_DIR/wifi.sh"
+
+# Volume
+sketchybar --add item volume right \
+           --set volume \
+             icon.color=0xffcba6f7 \
+             label.color=$TEXT \
+             background.color=$SURFACE \
+             script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+
+
+##### CPU USAGE GRAPH #####
+
+sketchybar --add graph cpu_usage right 50 \
+           --set cpu_usage \
+             script="$PLUGIN_DIR/cpu_usage.sh" \
+             update_freq=5 \
+             label.color=0xffb4befe \
+             graph.color=0xffb4befe \
+             graph.fill_color=0x55cba6f7 \
+             graph.line_width=2 \
+             icon.drawing=off
+
+
+##### FORCE INITIAL UPDATE #####
+sketchybar --update
