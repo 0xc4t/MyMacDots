@@ -1,13 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  # 1. Konfigurasi Modul nix-homebrew (Manajemen instalasi Homebrew-nya)
   nix-homebrew.enable = true;
   nix-homebrew.enableRosetta = true;
   nix-homebrew.user = "0xc4t";
-  nix-homebrew.autoMigrate = true; # Tambahkan ini agar otomatis migrasi jika sudah ada brew
+  nix-homebrew.autoMigrate = true;
 
-  # 2. Konfigurasi Homebrew bawaan nix-darwin (Manajemen Apps/Packages)
   homebrew = {
     enable = true;
     
@@ -28,7 +26,14 @@
       "mingw-w64"
       "clang-format"
       "openjdk"
-    ];
+      "spicetify-cli"
+      "sketchybar"
+      "switchaudio-osx"
+      "nowplaying-cli"
+      "readline"
+      "lua"
+      "borders"
+          ];
 
     casks = [
       "postman"
@@ -37,8 +42,11 @@
       "sf-symbols"
       "font-sf-mono"
       "font-sf-pro"
-      "aerospace"
       "localsend"
+      "flameshot"
+      "xquartz"
+      "sf-symbols"
+      "aerospace"
     ];
   };
 }

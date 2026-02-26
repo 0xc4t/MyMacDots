@@ -4,6 +4,7 @@
 {
   environment.systemPackages = with pkgs; [
     neovim
+    htop
     lsd
     kitty
     mkalias
@@ -11,10 +12,13 @@
     wget
     btop
     flameshot
-    sketchybar
     tree
-    lua
     openvpn
     nerd-fonts.iosevka
+    nasm
+    freerdp
+    pkgsCross.mingwW64.buildPackages.gcc
+    pkgsCross.mingwW64.openssl.dev
+    pkgsCross.mingwW64.openssl.out
   ];
 }

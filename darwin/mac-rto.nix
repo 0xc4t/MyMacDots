@@ -1,8 +1,8 @@
-
 { pkgs, ... }:
 
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
+
   environment.systemPackages = with pkgs; [
     exploitdb
     nmap
@@ -25,7 +25,11 @@
     firefox
     libimobiledevice
     frida-tools
-    apktool 
+    apktool
     ghauri
+    hash-identifier
+    katana
   ];
+
+
 }

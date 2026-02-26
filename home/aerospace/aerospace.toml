@@ -1,3 +1,14 @@
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE"',
+]
+# note: not used anymore, refer to aerospace.nix
+on-focus-changed = [
+  'exec-and-forget sketchybar --trigger aerospace_window_change',
+]
+
+
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
@@ -68,12 +79,16 @@ on-mode-changed = []
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 15
-    inner.vertical =   15
-    outer.left =       15
-    outer.bottom =     15
-    outer.top =        10
-    outer.right =      15
+    inner.horizontal = 10
+    inner.vertical =   10
+    outer.left =       10
+    outer.bottom =     10
+    outer.top = [
+      { monitor."built-in" = 10 },
+      { monitor."main" = 50 },
+      50
+    ]
+    outer.right =      10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -82,7 +97,7 @@ on-mode-changed = []
 [mode.main.binding]
     
     alt-q = 'close'
-    alt-enter = 'exec-and-forget open -a Kitty --args --single-instance' 
+    alt-enter = 'exec-and-forget /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~' 
 
     # All possible keys:
     # - Letters.        a, b, c, ..., z
